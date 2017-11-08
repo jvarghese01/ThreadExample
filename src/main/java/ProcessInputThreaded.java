@@ -16,6 +16,7 @@ public class ProcessInputThreaded {
     private static final Logger logger = LogManager.getLogger(ProcessInputThreaded.class);
 
 	public static void main(String[] args) throws IOException, InterruptedException {
+		long start = System.currentTimeMillis();
 		BufferedReader br = new BufferedReader(new FileReader(new File("/Users/jasonv/Documents/workspace/ThreadExample/test.txt")));
 		String line = null;
 		int lineCount = 0;
@@ -23,12 +24,8 @@ public class ProcessInputThreaded {
 		while((line = br.readLine())!=null){
 			lineCount++;
 			if(lineCount%100000000==0)
-				logger.info("A="+lineCount);
+				logger.info(lineCount);			
 			exe.execute(new ProcessFileTask(line,lineCount));
-			if(lineCount%100000000==0)
-				logger.info("B="+lineCount);
-
-
 		}
 		
 		br.close();
@@ -37,7 +34,8 @@ public class ProcessInputThreaded {
 		if(exe.awaitTermination(10, TimeUnit.DAYS)){
 			logger.info("DONE");
 		}
-		
+		long end = System.currentTimeMillis();
+		logger.info("total time: "+(end-start)+" milliseconds");		
 	}
 
 }

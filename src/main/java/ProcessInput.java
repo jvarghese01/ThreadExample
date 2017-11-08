@@ -15,9 +15,8 @@ public class ProcessInput {
     private static final Logger logger = LogManager.getLogger(ProcessInput.class);
 
 	public static void main(String[] args) throws IOException {
-
-		ProcessInput pi = new ProcessInput();
 		long start = System.currentTimeMillis();
+		ProcessInput pi = new ProcessInput();
 		pi.processFile();
 		long end = System.currentTimeMillis();
 		logger.info("total time: "+(end-start)+" milliseconds");
@@ -31,7 +30,7 @@ public class ProcessInput {
 		while((line = br.readLine())!=null){
 			lineCount++;
 			if(lineCount%100000000==0)
-				logger.info(lineCount+"");
+				logger.info(lineCount);
 			if(line.contains("jason")){
 				logger.info("found it:"+line+ " -- LINE NUMBER:"+lineCount);
 				break;
